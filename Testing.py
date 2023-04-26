@@ -19,6 +19,7 @@ Color_Locations = []
 Color_Collision = []
 
 Color = WHITE
+Color_Index = 0
 
 RUNNING = True
 
@@ -31,19 +32,9 @@ for i in range(Color_Count):
 
 
 def create_GUI():
-    global startX, startY
+    global startX, startY   
     index = 0
-    
-    X = 45
-    Y = 45
-    
-    for i in range(Color_Count):
-        rect = Color_Locations[i].rect
-        rect.center = ((X,Y))
-        LEDS.createLED(Color_Locations[i])
-        Color_Collision.append(rect)
-        X += 45
-    
+
     for _ in range(Rows):
         for i in range(Columns):
             if startY % 10 == 0:
@@ -68,7 +59,22 @@ def create_GUI():
                 
             
         startY += 45
-
+    
+def CreateColors():
+    global ColorX, ColorY
+    
+    color_index = 0
+    
+    for a in range(Color_Rows):
+        for b in range(Color_Columns):
+            rect = Color_Locations[Color_Index].rect
+            rect.center = ((ColorX, ColorY))
+            LEDS.createLED(Color_Locations[color_index])
+            Color_Collision.append(rect)
+            color_index += 1
+            y
+        ColorY += 45
+        ColorX = 115
 
 while (RUNNING):
 
@@ -82,7 +88,10 @@ while (RUNNING):
 
     startX = 115
     startY = 300
+    ColorX = 115
+    ColorY = 45
     create_GUI()
+    CreateColors()
     
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
