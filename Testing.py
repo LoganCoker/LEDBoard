@@ -19,7 +19,6 @@ Color_Locations = []
 Color_Collision = []
 
 Color = WHITE
-Color_Index = 0
 
 RUNNING = True
 
@@ -61,18 +60,19 @@ def create_GUI():
         startY += 45
     
 def CreateColors():
-    global ColorX, ColorY
+    ColorX = 115
+    ColorY = 45
     
     color_index = 0
     
     for a in range(Color_Rows):
         for b in range(Color_Columns):
-            rect = Color_Locations[Color_Index].rect
+            rect = Color_Locations[color_index].rect
             rect.center = ((ColorX, ColorY))
             LEDS.createLED(Color_Locations[color_index])
             Color_Collision.append(rect)
             color_index += 1
-            y
+            ColorX += 127
         ColorY += 45
         ColorX = 115
 
@@ -88,8 +88,6 @@ while (RUNNING):
 
     startX = 115
     startY = 300
-    ColorX = 115
-    ColorY = 45
     create_GUI()
     CreateColors()
     
