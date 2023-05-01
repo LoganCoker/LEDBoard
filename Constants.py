@@ -35,8 +35,8 @@ LED_COUNT = 144
 Color_Count = len(ColorList)
 Color_Rows = 3
 Color_Columns = 7
-Columns = 18
-Rows = 8
+Columns = 16
+Rows = 9
 
 
 # keys from pygame
