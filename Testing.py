@@ -111,12 +111,32 @@ def CreateColors():
     LEDS.createLED(Color_Locations[color_index])
     Color_Collision.append(rect)
 
+def Update():
+    print('Update')
+
+def Clear():
+    print('Clear')
+
+def Anim1():
+    print('Anim1')
+    
+def Anim2():
+    print('Anim2')
+
 while (RUNNING):
     
     
     for event in pygame.event.get():
         if (event.type == KEYDOWN and event.key == K_ESCAPE):
             RUNNING = False
+        elif (event.type == KEYDOWN and event.key == K_UP):
+            Update()
+        elif (event.type == KEYDOWN and event.key == K_DOWN):
+            Clear()
+        elif (event.type == KEYDOWN and event.key == K_LEFT):
+            Anim1()
+        elif (event.type == KEYDOWN and event.key == K_RIGHT):
+            Anim2()
         elif (event.type == QUIT):
             RUNNING = False
     
@@ -139,19 +159,17 @@ while (RUNNING):
             
             for i in Color_Collision:
                 if i.collidepoint(Xtouch,Ytouch):
-                    print(f'{i}')
                     newindex = Color_Collision.index(i)
                     newcolor = Color_Locations[newindex]
                     Color = newcolor.fill
             
             for i in LED_Collision:
                 if i.collidepoint(Xtouch, Ytouch):
-                    print(f'{i}')
                     led = LED_Collision.index(i)
                     LED_Locations[led] = LEDS(screen, fill=Color)
-                                    
+        
     pygame_widgets.update(event)
 
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(120)
 
