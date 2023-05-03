@@ -8,10 +8,8 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 
-LED_Locations = []
-LED_Collision = []
-Color_Locations = []
-Color_Collision = []
+LEDs = pygame.sprite.Group()
+allSprites = pygame.sprite.Group()
 
 color = WHITE
 
@@ -27,31 +25,23 @@ while (RUNNING):
     
     screen.fill(WHITE)
 
-    startX = 300
-    startY = 200
-    for _ in range(10):
-        for i in range(10):
-            LED = LEDS(screen)
-            rect = LED.rect
-            rect.center = ((startX, startY))
-            LED_Locations.append(LEDS.createLED(LED))
-            LED_Collision.append(rect)
-            startX += 45
-        startX = 300
-        startY += 45
+    startX = 10
+    startY = 10
     
-    colorX = 25
-    colorY = 25
-    colorIndex = 0
-    for _ in range(5):
-        COLOR = Colors(screen)
-        rect = COLOR.get_rect()
-        rect.center = ((colorX, colorY))
-        COLOR.color = ColorList[colorIndex]
-        Color_Locations.append(Colors.createColors(COLOR))
-        Color_Collision.append(rect)
-        colorX += 45
-        colorIndex += 1
+    for i in range(0, 256, 20):
+        x = startX
+        y = startY
+        for j in range(0, 256, 20):
+            for k in range(0, 256, 20):
+                color = [i, j, k]
+                led = LEDS(screen, x, y, fill=color)
+                rect = led.rect
+                rect.center = ((startX, startY))
+                allSprites.add(led)
+                x += 5
+            x = startX
+            y += 5
+            
         
 
     
@@ -59,10 +49,11 @@ while (RUNNING):
         if event.type == pygame.MOUSEBUTTONDOWN:
             Xtouch = event.pos[0]
             Ytouch = event.pos[1]
-            for i in LED_Collision:
-                if i.collidepoint(Xtouch, Ytouch):
-                    print(f'{i}')
+            
                     
+    for i in allSprites:
+        screen.blit(i.sprite, i.rect)
+
 
     Color = BLUE
 

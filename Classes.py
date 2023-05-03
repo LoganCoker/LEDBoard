@@ -6,19 +6,24 @@ collisionRect = pygame.Surface((40,40))
 
 class LEDS(pygame.sprite.Sprite):
 
-    def __init__(self, screen, fill = WHITE, outline = BLACK, radius = 5, thickness = 1):
+    def __init__(self, screen, xPos , yPos, fill = WHITE, outline = BLACK, radius = 5, thickness = 1):
         pygame.sprite.Sprite.__init__(self)
         self.color = fill
         self.screen = screen
         self.outline = outline
         self.radius = radius
         self.thickness = thickness
-        self.sprite = pygame.Surface((40,40))
+        self.sprite = pygame.Surface((5,5))
         self.rect = self.sprite.get_rect()
+        self.rect.center = (xPos, yPos)
 
     
     def createLED(self):
-        self.sprite = draw_bordered_rounded_rect(self.screen, self.rect, self.color, self.outline, self.radius, self.thickness)
+        draw_bordered_rounded_rect(self.screen, self.rect, self.color, self.outline, self.radius, self.thickness)
+
+    def position(self):
+        return self.rect.center
+
 
 class Colors(pygame.Surface):
 
