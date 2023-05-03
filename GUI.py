@@ -5,7 +5,6 @@ from Classes import *
 import pygame_widgets
 from pygame_widgets.slider import Slider
 from pygame_widgets.textbox import TextBox
-import debugpy
 
 
 pygame.init()
@@ -172,4 +171,3 @@ while (RUNNING):
 
     pygame.display.flip()
     clock.tick(120)
-

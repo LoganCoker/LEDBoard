@@ -48,4 +48,6 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
     K_SPACE,
+    K_BACKSPACE,
+    K_1, K_2, K_3
 )
