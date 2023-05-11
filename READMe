@@ -1,1 +1,13 @@
-first things 
+Code for the LED board
+
+libraries: 
+    rpi_ws281x 
+    argparse 
+both of these libraries are for working with the LED strip. 
+
+For the expo, we used the file 'Testing.py' as our GUI. 
+
+'Functions.py' is two function taken from the internet to make a rounded square
+
+'testy.py' is half a test file form the internet and half things we made ourself.
+    Everything pre-made is marked above in a comment
