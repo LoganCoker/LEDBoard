@@ -3,7 +3,7 @@ from rpi_ws281x import *
 import argparse
 from random import randint
 
-# LED strip configuration:
+# LED strip configuration (internet):
 LED_COUNT      = 144     # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
@@ -14,7 +14,7 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
-# Define functions which animate LEDs in various ways.
+# Define functions which animate LEDs in various ways. (internet)
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
@@ -22,6 +22,7 @@ def colorWipe(strip, color, wait_ms=50):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+# (internet)
 def theaterChase(strip, color, wait_ms=50, iterations=10):
     """Movie theater light style chaser animation."""
     for j in range(iterations):
@@ -33,6 +34,7 @@ def theaterChase(strip, color, wait_ms=50, iterations=10):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
 
+# (internet)
 def wheel(pos):
     """Generate rainbow colors across 0-255 positions."""
     if pos < 85:
@@ -44,6 +46,7 @@ def wheel(pos):
         pos -= 170
         return Color(0, pos * 3, 255 - pos * 3)
 
+# (internet)
 def rainbow(strip, wait_ms=20, iterations=1):
     """Draw rainbow that fades across all pixels at once."""
     for j in range(256*iterations):
@@ -52,6 +55,7 @@ def rainbow(strip, wait_ms=20, iterations=1):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+# (internet)
 def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
     for j in range(256*iterations):
@@ -60,9 +64,10 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+# (internet)
 def theaterChaseRainbow(strip, wait_ms=50):
     """Rainbow movie theater light style chaser animation."""
-    for j in range(256):
+    for j in range(100):
         for q in range(3):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, wheel((i+j) % 255))
@@ -70,9 +75,9 @@ def theaterChaseRainbow(strip, wait_ms=50):
             time.sleep(wait_ms/1000.0)
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
-                
+
+
 def randomColors(strip):
-    
     for i in range(strip.numPixels()):
         R = randint(0,255)
         G = randint(0,255)
@@ -81,22 +86,25 @@ def randomColors(strip):
         strip.setPixelColor(i, Color(R, G, B))
         strip.show()
 
+
 def clearOff(strip):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, Color(0, 0, 0))
         strip.show()
+
 
 def clearOn(strip):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, Color(255, 255, 255))
         strip.show()
 
-def techSign(strip):
+
+def techSignAni(strip):
     for i in range(16):
         strip.setPixelColor(i, Color(0,0,0))
     for i in range(128,144):
         strip.setPixelColor(i, Color(0,0,0))
-    for i in range(10):
+    for i in range(20):
         if i%2 == 0:
             for i in range(16,32):
                 strip.setPixelColor(i, Color(0,0,255))
@@ -104,96 +112,94 @@ def techSign(strip):
                 strip.setPixelColor(i, Color(0,0,255))
             
             # line 1
+            strip.setPixelColor(32, Color(255,0,0))
             strip.setPixelColor(33, Color(255,0,0))
             strip.setPixelColor(34, Color(255,0,0))
-            strip.setPixelColor(35, Color(255,0,0))
-            strip.setPixelColor(36, Color(0,0,255))
+            strip.setPixelColor(35, Color(0,0,255))
+            strip.setPixelColor(36, Color(255,0,0))
             strip.setPixelColor(37, Color(255,0,0))
             strip.setPixelColor(38, Color(255,0,0))
-            strip.setPixelColor(39, Color(255,0,0))
+            strip.setPixelColor(39, Color(0,0,255))
             strip.setPixelColor(40, Color(0,0,255))
-            strip.setPixelColor(41, Color(0,0,255))
+            strip.setPixelColor(41, Color(255,0,0))
             strip.setPixelColor(42, Color(255,0,0))
-            strip.setPixelColor(43, Color(255,0,0))
+            strip.setPixelColor(43, Color(0,0,255))
             strip.setPixelColor(44, Color(0,0,255))
-            strip.setPixelColor(45, Color(0,0,255))
-            strip.setPixelColor(46, Color(255,0,0))
-            strip.setPixelColor(47, Color(0,0,255))
-            strip.setPixelColor(48, Color(255,0,0))
+            strip.setPixelColor(45, Color(255,0,0))
+            strip.setPixelColor(46, Color(0,0,255))
+            strip.setPixelColor(47, Color(255,0,0))
 
             # line 2
+            strip.setPixelColor(48, Color(255,0,0))
             strip.setPixelColor(49, Color(0,0,255))
             strip.setPixelColor(50, Color(255,0,0))
             strip.setPixelColor(51, Color(0,0,255))
-            strip.setPixelColor(52, Color(0,0,255))
-            strip.setPixelColor(53, Color(255,0,0))
+            strip.setPixelColor(52, Color(255,0,0))
+            strip.setPixelColor(53, Color(0,0,255))
             strip.setPixelColor(54, Color(0,0,255))
-            strip.setPixelColor(55, Color(0,0,255))
+            strip.setPixelColor(55, Color(255,0,0))
             strip.setPixelColor(56, Color(0,0,255))
-            strip.setPixelColor(57, Color(255,0,0))
+            strip.setPixelColor(57, Color(0,0,255))
             strip.setPixelColor(58, Color(0,0,255))
-            strip.setPixelColor(59, Color(0,0,255))
-            strip.setPixelColor(60, Color(255,0,0))
+            strip.setPixelColor(59, Color(255,0,0))
+            strip.setPixelColor(60, Color(0,0,255))
             strip.setPixelColor(61, Color(0,0,255))
             strip.setPixelColor(62, Color(255,0,0))
             strip.setPixelColor(63, Color(0,0,255))
-            strip.setPixelColor(64, Color(255,0,0))
 
-            # line 3
-            strip.setPixelColor(65, Color(0,0,255))
-            strip.setPixelColor(66, Color(255,0,0))
+            # # line 3
+            strip.setPixelColor(64, Color(0,0,255))
+            strip.setPixelColor(65, Color(255,0,0))
+            strip.setPixelColor(66, Color(0,0,255))
             strip.setPixelColor(67, Color(0,0,255))
-            strip.setPixelColor(68, Color(0,0,255))
+            strip.setPixelColor(68, Color(255,0,0))
             strip.setPixelColor(69, Color(255,0,0))
-            strip.setPixelColor(70, Color(255,0,0))
+            strip.setPixelColor(70, Color(0,0,255))
             strip.setPixelColor(71, Color(0,0,255))
-            strip.setPixelColor(72, Color(0,0,255))
-            strip.setPixelColor(73, Color(255,0,0))
+            strip.setPixelColor(72, Color(255,0,0))
+            strip.setPixelColor(73, Color(0,0,255))
             strip.setPixelColor(74, Color(0,0,255))
             strip.setPixelColor(75, Color(0,0,255))
             strip.setPixelColor(76, Color(0,0,255))
-            strip.setPixelColor(77, Color(0,0,255))
+            strip.setPixelColor(77, Color(255,0,0))
             strip.setPixelColor(78, Color(255,0,0))
             strip.setPixelColor(79, Color(255,0,0))
-            strip.setPixelColor(80, Color(255,0,0))
 
-            # line 4
+            # # line 4
+            strip.setPixelColor(80, Color(255,0,0))
             strip.setPixelColor(81, Color(0,0,255))
             strip.setPixelColor(82, Color(255,0,0))
             strip.setPixelColor(83, Color(0,0,255))
-            strip.setPixelColor(84, Color(0,0,255))
-            strip.setPixelColor(85, Color(255,0,0))
+            strip.setPixelColor(84, Color(255,0,0))
+            strip.setPixelColor(85, Color(0,0,255))
             strip.setPixelColor(86, Color(0,0,255))
-            strip.setPixelColor(87, Color(0,0,255))
+            strip.setPixelColor(87, Color(255,0,0))
             strip.setPixelColor(88, Color(0,0,255))
-            strip.setPixelColor(89, Color(255,0,0))
+            strip.setPixelColor(89, Color(0,0,255))
             strip.setPixelColor(90, Color(0,0,255))
-            strip.setPixelColor(91, Color(0,0,255))
-            strip.setPixelColor(92, Color(255,0,0))
+            strip.setPixelColor(91, Color(255,0,0))
+            strip.setPixelColor(92, Color(0,0,255))
             strip.setPixelColor(93, Color(0,0,255))
             strip.setPixelColor(94, Color(255,0,0))
             strip.setPixelColor(95, Color(0,0,255))
-            strip.setPixelColor(96, Color(255,0,0))
 
-            # line 5
-            strip.setPixelColor(97, Color(0,0,255))
-            strip.setPixelColor(98, Color(255,0,0))
+            # # line 5
+            strip.setPixelColor(96, Color(0,0,255))
+            strip.setPixelColor(97, Color(255,0,0))
+            strip.setPixelColor(98, Color(0,0,255))
             strip.setPixelColor(99, Color(0,0,255))
-            strip.setPixelColor(100, Color(0,0,255))
+            strip.setPixelColor(100, Color(255,0,0))
             strip.setPixelColor(101, Color(255,0,0))
             strip.setPixelColor(102, Color(255,0,0))
-            strip.setPixelColor(103, Color(255,0,0))
+            strip.setPixelColor(103, Color(0,0,255))
             strip.setPixelColor(104, Color(0,0,255))
-            strip.setPixelColor(105, Color(0,0,255))
+            strip.setPixelColor(105, Color(255,0,0))
             strip.setPixelColor(106, Color(255,0,0))
-            strip.setPixelColor(107, Color(255,0,0))
+            strip.setPixelColor(107, Color(0,0,255))
             strip.setPixelColor(108, Color(0,0,255))
-            strip.setPixelColor(109, Color(0,0,255))
-            strip.setPixelColor(110, Color(255,0,0))
-            strip.setPixelColor(111, Color(0,0,255))
-            strip.setPixelColor(112, Color(255,0,0))
-            
-            
+            strip.setPixelColor(109, Color(255,0,0))
+            strip.setPixelColor(110, Color(0,0,255))
+            strip.setPixelColor(111, Color(255,0,0)) 
         else:
             for i in range(16,32):
                 strip.setPixelColor(i, Color(255,0,0))
@@ -201,100 +207,202 @@ def techSign(strip):
                 strip.setPixelColor(i, Color(255,0,0))
             
             # line 1
+            strip.setPixelColor(32, Color(0,0,255))
             strip.setPixelColor(33, Color(0,0,255))
             strip.setPixelColor(34, Color(0,0,255))
-            strip.setPixelColor(35, Color(0,0,255))
-            strip.setPixelColor(36, Color(255,0,0))
+            strip.setPixelColor(35, Color(255,0,0))
+            strip.setPixelColor(36, Color(0,0,255))
             strip.setPixelColor(37, Color(0,0,255))
             strip.setPixelColor(38, Color(0,0,255))
-            strip.setPixelColor(39, Color(0,0,255))
+            strip.setPixelColor(39, Color(255,0,0))
             strip.setPixelColor(40, Color(255,0,0))
-            strip.setPixelColor(41, Color(255,0,0))
+            strip.setPixelColor(41, Color(0,0,255))
             strip.setPixelColor(42, Color(0,0,255))
-            strip.setPixelColor(43, Color(0,0,255))
+            strip.setPixelColor(43, Color(255,0,0))
             strip.setPixelColor(44, Color(255,0,0))
-            strip.setPixelColor(45, Color(255,0,0))
-            strip.setPixelColor(46, Color(0,0,255))
-            strip.setPixelColor(47, Color(255,0,0))
-            strip.setPixelColor(48, Color(0,0,255))
+            strip.setPixelColor(45, Color(0,0,255))
+            strip.setPixelColor(46, Color(255,0,0))
+            strip.setPixelColor(47, Color(0,0,255))
 
             # line 2
+            strip.setPixelColor(48, Color(0,0,255))
             strip.setPixelColor(49, Color(255,0,0))
             strip.setPixelColor(50, Color(0,0,255))
             strip.setPixelColor(51, Color(255,0,0))
-            strip.setPixelColor(52, Color(255,0,0))
-            strip.setPixelColor(53, Color(0,0,255))
+            strip.setPixelColor(52, Color(0,0,255))
+            strip.setPixelColor(53, Color(255,0,0))
             strip.setPixelColor(54, Color(255,0,0))
-            strip.setPixelColor(55, Color(255,0,0))
+            strip.setPixelColor(55, Color(0,0,255))
             strip.setPixelColor(56, Color(255,0,0))
-            strip.setPixelColor(57, Color(0,0,255))
+            strip.setPixelColor(57, Color(255,0,0))
             strip.setPixelColor(58, Color(255,0,0))
-            strip.setPixelColor(59, Color(255,0,0))
-            strip.setPixelColor(60, Color(0,0,255))
+            strip.setPixelColor(59, Color(0,0,255))
+            strip.setPixelColor(60, Color(255,0,0))
             strip.setPixelColor(61, Color(255,0,0))
             strip.setPixelColor(62, Color(0,0,255))
             strip.setPixelColor(63, Color(255,0,0))
-            strip.setPixelColor(64, Color(0,0,255))
 
             # line 3
-            strip.setPixelColor(65, Color(255,0,0))
-            strip.setPixelColor(66, Color(0,0,255))
+            strip.setPixelColor(64, Color(255,0,0))
+            strip.setPixelColor(65, Color(0,0,255))
+            strip.setPixelColor(66, Color(255,0,0))
             strip.setPixelColor(67, Color(255,0,0))
-            strip.setPixelColor(68, Color(255,0,0))
+            strip.setPixelColor(68, Color(0,0,255))
             strip.setPixelColor(69, Color(0,0,255))
-            strip.setPixelColor(70, Color(0,0,255))
+            strip.setPixelColor(70, Color(255,0,0))
             strip.setPixelColor(71, Color(255,0,0))
-            strip.setPixelColor(72, Color(255,0,0))
-            strip.setPixelColor(73, Color(0,0,255))
+            strip.setPixelColor(72, Color(0,0,255))
+            strip.setPixelColor(73, Color(255,0,0))
             strip.setPixelColor(74, Color(255,0,0))
             strip.setPixelColor(75, Color(255,0,0))
             strip.setPixelColor(76, Color(255,0,0))
-            strip.setPixelColor(77, Color(255,0,0))
+            strip.setPixelColor(77, Color(0,0,255))
             strip.setPixelColor(78, Color(0,0,255))
             strip.setPixelColor(79, Color(0,0,255))
-            strip.setPixelColor(80, Color(0,0,255))
 
             # line 4
+            strip.setPixelColor(80, Color(0,0,255))
             strip.setPixelColor(81, Color(255,0,0))
             strip.setPixelColor(82, Color(0,0,255))
             strip.setPixelColor(83, Color(255,0,0))
-            strip.setPixelColor(84, Color(255,0,0))
-            strip.setPixelColor(85, Color(0,0,255))
+            strip.setPixelColor(84, Color(0,0,255))
+            strip.setPixelColor(85, Color(255,0,0))
             strip.setPixelColor(86, Color(255,0,0))
-            strip.setPixelColor(87, Color(255,0,0))
+            strip.setPixelColor(87, Color(0,0,255))
             strip.setPixelColor(88, Color(255,0,0))
-            strip.setPixelColor(89, Color(0,0,255))
+            strip.setPixelColor(89, Color(255,0,0))
             strip.setPixelColor(90, Color(255,0,0))
-            strip.setPixelColor(91, Color(255,0,0))
-            strip.setPixelColor(92, Color(0,0,255))
+            strip.setPixelColor(91, Color(0,0,255))
+            strip.setPixelColor(92, Color(255,0,0))
             strip.setPixelColor(93, Color(255,0,0))
             strip.setPixelColor(94, Color(0,0,255))
             strip.setPixelColor(95, Color(255,0,0))
-            strip.setPixelColor(96, Color(0,0,255))
 
             # line 5
-            strip.setPixelColor(97, Color(255,0,0))
-            strip.setPixelColor(98, Color(0,0,255))
+            strip.setPixelColor(96, Color(255,0,0))
+            strip.setPixelColor(97, Color(0,0,255))
+            strip.setPixelColor(98, Color(255,0,0))
             strip.setPixelColor(99, Color(255,0,0))
-            strip.setPixelColor(100, Color(255,0,0))
+            strip.setPixelColor(100, Color(0,0,255))
             strip.setPixelColor(101, Color(0,0,255))
             strip.setPixelColor(102, Color(0,0,255))
-            strip.setPixelColor(103, Color(0,0,255))
+            strip.setPixelColor(103, Color(255,0,0))
             strip.setPixelColor(104, Color(255,0,0))
-            strip.setPixelColor(105, Color(255,0,0))
+            strip.setPixelColor(105, Color(0,0,255))
             strip.setPixelColor(106, Color(0,0,255))
-            strip.setPixelColor(107, Color(0,0,255))
+            strip.setPixelColor(107, Color(255,0,0))
             strip.setPixelColor(108, Color(255,0,0))
-            strip.setPixelColor(109, Color(255,0,0))
-            strip.setPixelColor(110, Color(0,0,255))
-            strip.setPixelColor(111, Color(255,0,0))
-            strip.setPixelColor(112, Color(0,0,255))
-        
+            strip.setPixelColor(109, Color(0,0,255))
+            strip.setPixelColor(110, Color(255,0,0))
+            strip.setPixelColor(111, Color(0,0,255))
             
         strip.show()
         time.sleep(.2)
 
+def techSign(strip):
+    for i in range(16):
+        strip.setPixelColor(i, Color(0,0,0))
+    for i in range(16,32):
+        strip.setPixelColor(i, Color(0,0,255))
+    
+    # line 1
+    strip.setPixelColor(32, Color(255,0,0))
+    strip.setPixelColor(33, Color(255,0,0))
+    strip.setPixelColor(34, Color(255,0,0))
+    strip.setPixelColor(35, Color(0,0,255))
+    strip.setPixelColor(36, Color(255,0,0))
+    strip.setPixelColor(37, Color(255,0,0))
+    strip.setPixelColor(38, Color(255,0,0))
+    strip.setPixelColor(39, Color(0,0,255))
+    strip.setPixelColor(40, Color(0,0,255))
+    strip.setPixelColor(41, Color(255,0,0))
+    strip.setPixelColor(42, Color(255,0,0))
+    strip.setPixelColor(43, Color(0,0,255))
+    strip.setPixelColor(44, Color(0,0,255))
+    strip.setPixelColor(45, Color(255,0,0))
+    strip.setPixelColor(46, Color(0,0,255))
+    strip.setPixelColor(47, Color(255,0,0))
 
+    # line 2
+    strip.setPixelColor(48, Color(255,0,0))
+    strip.setPixelColor(49, Color(0,0,255))
+    strip.setPixelColor(50, Color(255,0,0))
+    strip.setPixelColor(51, Color(0,0,255))
+    strip.setPixelColor(52, Color(255,0,0))
+    strip.setPixelColor(53, Color(0,0,255))
+    strip.setPixelColor(54, Color(0,0,255))
+    strip.setPixelColor(55, Color(255,0,0))
+    strip.setPixelColor(56, Color(0,0,255))
+    strip.setPixelColor(57, Color(0,0,255))
+    strip.setPixelColor(58, Color(0,0,255))
+    strip.setPixelColor(59, Color(255,0,0))
+    strip.setPixelColor(60, Color(0,0,255))
+    strip.setPixelColor(61, Color(0,0,255))
+    strip.setPixelColor(62, Color(255,0,0))
+    strip.setPixelColor(63, Color(0,0,255))
+
+    # # line 3
+    strip.setPixelColor(64, Color(0,0,255))
+    strip.setPixelColor(65, Color(255,0,0))
+    strip.setPixelColor(66, Color(0,0,255))
+    strip.setPixelColor(67, Color(0,0,255))
+    strip.setPixelColor(68, Color(255,0,0))
+    strip.setPixelColor(69, Color(255,0,0))
+    strip.setPixelColor(70, Color(0,0,255))
+    strip.setPixelColor(71, Color(0,0,255))
+    strip.setPixelColor(72, Color(255,0,0))
+    strip.setPixelColor(73, Color(0,0,255))
+    strip.setPixelColor(74, Color(0,0,255))
+    strip.setPixelColor(75, Color(0,0,255))
+    strip.setPixelColor(76, Color(0,0,255))
+    strip.setPixelColor(77, Color(255,0,0))
+    strip.setPixelColor(78, Color(255,0,0))
+    strip.setPixelColor(79, Color(255,0,0))
+
+    # # line 4
+    strip.setPixelColor(80, Color(255,0,0))
+    strip.setPixelColor(81, Color(0,0,255))
+    strip.setPixelColor(82, Color(255,0,0))
+    strip.setPixelColor(83, Color(0,0,255))
+    strip.setPixelColor(84, Color(255,0,0))
+    strip.setPixelColor(85, Color(0,0,255))
+    strip.setPixelColor(86, Color(0,0,255))
+    strip.setPixelColor(87, Color(255,0,0))
+    strip.setPixelColor(88, Color(0,0,255))
+    strip.setPixelColor(89, Color(0,0,255))
+    strip.setPixelColor(90, Color(0,0,255))
+    strip.setPixelColor(91, Color(255,0,0))
+    strip.setPixelColor(92, Color(0,0,255))
+    strip.setPixelColor(93, Color(0,0,255))
+    strip.setPixelColor(94, Color(255,0,0))
+    strip.setPixelColor(95, Color(0,0,255))
+
+    # # line 5
+    strip.setPixelColor(96, Color(0,0,255))
+    strip.setPixelColor(97, Color(255,0,0))
+    strip.setPixelColor(98, Color(0,0,255))
+    strip.setPixelColor(99, Color(0,0,255))
+    strip.setPixelColor(100, Color(255,0,0))
+    strip.setPixelColor(101, Color(255,0,0))
+    strip.setPixelColor(102, Color(255,0,0))
+    strip.setPixelColor(103, Color(0,0,255))
+    strip.setPixelColor(104, Color(0,0,255))
+    strip.setPixelColor(105, Color(255,0,0))
+    strip.setPixelColor(106, Color(255,0,0))
+    strip.setPixelColor(107, Color(0,0,255))
+    strip.setPixelColor(108, Color(0,0,255))
+    strip.setPixelColor(109, Color(255,0,0))
+    strip.setPixelColor(110, Color(0,0,255))
+    strip.setPixelColor(111, Color(255,0,0))
+
+    for i in range(112,128):
+        strip.setPixelColor(i, Color(0,0,255))
+    for i in range(128,144):
+        strip.setPixelColor(i, Color(0,0,0))
+    
+    strip.show()
+    time.sleep(.2)
+            
 
 def update(strip, list):
     index = 0
@@ -306,7 +414,7 @@ def update(strip, list):
     strip.show()
 
 
-# Main program logic follows:
+# Main program logic follows: (internet w/ a little change)
 if __name__ == '__main__':
     # Process arguments
     parser = argparse.ArgumentParser()
@@ -335,4 +443,3 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0), 1)
-

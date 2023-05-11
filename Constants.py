@@ -1,7 +1,7 @@
 import pygame
 
-HEIGHT = 700
-WIDTH = 1000
+HEIGHT = 900
+WIDTH = 1500
 
 RED = [255, 0, 0]
 RED_ORANGE = [255, 88, 0]
@@ -49,5 +49,8 @@ from pygame.locals import (
     QUIT,
     K_SPACE,
     K_BACKSPACE,
-    K_1, K_2, K_3
+    K_1, K_2, K_3, K_0, K_4,
+    K_EQUALS, K_MINUS
 )
+
+
